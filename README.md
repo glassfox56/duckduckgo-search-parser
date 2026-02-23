@@ -13,19 +13,19 @@ Document the strategy, progress, and next steps for the DuckDuckGo search result
 - Repository created to house documentation (this doc).
 - Strategy outlined and approved in chat.
 - No parser code written yet; waiting for the first sample parser draft/input.
-- Collected three representative DuckDuckGo HTML snapshots (standard, instant answer, news) for parser reference.
+- Collected three representative DuckDuckGo HTML snapshots (standard/search results, weather question, and news query) for parser reference.
+- Cataloged selectors/markup patterns in `docs/selectors.md`, based on the raw `/html/` output and zero-click section.
 
 ## Samples
 Representative HTML snapshots live under `samples/`:
-- `samples/duckduckgo-standard.html`
-- `samples/duckduckgo-weather.html`
-- `samples/duckduckgo-news.html`
+- `samples/html-openclaw.html`
+- `samples/html-weather-Jakarta.html`
+- `samples/html-OpenAI-news.html`
 
 ## Next Steps
-1. Catalog selectors and markup patterns for result blocks, titles/links, snippets, URLs, and instant answers.
-2. Build parser module (likely in JavaScript/TypeScript) that extracts structured results.
-3. Hook parser into the `web_search` tool once outputs are consistent.
-4. Document ongoing findings here so the task history is transparent.
+1. Build parser module (likely in JavaScript/TypeScript) that extracts structured results.
+2. Hook parser into the `web_search` tool once outputs are consistent.
+3. Document ongoing findings here so the task history is transparent.
 
 ## Board
 The detailed to-do list lives in [docs/board.md](docs/board.md), arranged like a simple Kanban board for tracking progress.
