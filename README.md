@@ -1,7 +1,7 @@
-# DuckDuckGo Parser Task Documentation
+# DuckDuckGo Search Parser
 
 ## Purpose
-Document the strategy, progress, and next steps for the DuckDuckGo search results parser and web search integration work requested by Mas Nanda.
+Document the strategy, progress, and next steps for the DuckDuckGo search results parser and `web_search` integration that live in the `duckduckgo-search-parser` repository (https://github.com/glassfox56/duckduckgo-search-parser).
 
 ## Strategy
 1. **Analyze DuckDuckGo HTML** – capture sample responses, identify selectors for titles, URLs, snippets, and answer boxes so the parser is resilient.
