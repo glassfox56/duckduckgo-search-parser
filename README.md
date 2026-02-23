@@ -13,9 +13,16 @@ Document the strategy, progress, and next steps for the DuckDuckGo search result
 - Repository created to house documentation (this doc).
 - Strategy outlined and approved in chat.
 - No parser code written yet; waiting for the first sample parser draft/input.
+- Collected three representative DuckDuckGo HTML snapshots (standard, instant answer, news) for parser reference.
+
+## Samples
+Representative HTML snapshots live under `samples/`:
+- `samples/duckduckgo-standard.html`
+- `samples/duckduckgo-weather.html`
+- `samples/duckduckgo-news.html`
 
 ## Next Steps
-1. Capture DuckDuckGo HTML samples and note reliable selectors.
+1. Catalog selectors and markup patterns for result blocks, titles/links, snippets, URLs, and instant answers.
 2. Build parser module (likely in JavaScript/TypeScript) that extracts structured results.
 3. Hook parser into the `web_search` tool once outputs are consistent.
 4. Document ongoing findings here so the task history is transparent.
