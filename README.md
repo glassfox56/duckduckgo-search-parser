@@ -20,5 +20,8 @@ Document the strategy, progress, and next steps for the DuckDuckGo search result
 3. Hook parser into the `web_search` tool once outputs are consistent.
 4. Document ongoing findings here so the task history is transparent.
 
+## Board
+The detailed to-do list lives in [docs/board.md](docs/board.md), arranged like a simple Kanban board for tracking progress.
+
 ## Contact
 Ping Mas Nanda (Boss) in Telegram if updates or reviews are needed.
