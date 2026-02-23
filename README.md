@@ -29,6 +29,7 @@ Representative HTML snapshots live under `samples/`:
 - `samples/openclaw-news.html`
 - `samples/openclaw-images.html`
 - `samples/openclaw-search.html`
+- `samples/openclaw-videos.html`
 
 ## Next Steps
 1. Hook parser into the `web_search` tool once outputs are consistent.
