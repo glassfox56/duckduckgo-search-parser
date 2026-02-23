@@ -45,7 +45,13 @@ Plug this module into the Gateway the same way you would a custom provider (for 
 - DuckDuckGo HTML is lightweight, so you can keep a small LRU cache in the provider module and return cached results while the cache TTL is fresh.
 - Always send a realistic `User-Agent` and respect `robots` headers if you switch to a more aggressive fetch (more advanced rate limiting or rotating IPs may be necessary if you scale beyond casual use).
 
-## 4. Future proofing
+## 4. Packaging the wrapper as a skill
+
+- `/skills/duckduckgo-web-search` contains the frontend that Gateway integrators can import directly (look at `SKILL.md` for instructions and `scripts/provider.js` for the helper).
+- The skill exposes `fetchDuckDuckGo(query)` plus a CLI via `run(argv)` so the provider logic can be invoked from any custom module or skill/plugin entrypoint.
+- When packaging or distributing the skill, include the script, README instructions, and the integration doc so other agents know how to register the `duckduckgo-html` provider.
+
+## 5. Future proofing
 
 - The parser documents known selectors in `docs/selectors.md`. If DuckDuckGo updates its HTML, the provider only needs to refresh that doc and adjust `src/duckduckgoParser.js` accordingly.
 - When the Gateway eventually needs instant answer blocks or tabs (News/Images), extend `fetchDuckDuckGo` to request `https://duckduckgo.com/html/?q=...&ia=web` or other endpoints and adapt the parser accordingly.
