@@ -9,6 +9,10 @@ Document the strategy, progress, and next steps for the DuckDuckGo search result
 3. **Tool Integration** – plug the parser into the existing `web_search` tool so it can respond with structured data, include caching/fallbacks as needed.
 4. **Validation & Docs** – add tests or sample fixtures and keep documentation up to date with selectors or known quirks.
 
+## Setup
+- Install dependencies via `pnpm install` (requires pnpm to be installed globally).
+- If pnpm isn’t available on the system yet, `npm install -g pnpm` will add it.
+
 ## Progress
 - Repository created to house documentation (this doc).
 - Strategy outlined and approved in chat.
@@ -29,7 +33,7 @@ Representative HTML snapshots live under `samples/`:
 
 ## Parser Module
 - `src/duckduckgoParser.js` exports `parseDuckDuckGoHTML(html)` which returns an array of zero-click / web result objects with `title`, `url`, `displayUrl`, `snippet`, `date`, `isAd`, and `source` metadata.
-- CLI helper `scripts/parse-sample.js <sample-path>` lets you inspect parser output from any saved HTML snapshot; run `npm run parse` to exercise it against `samples/html-openclaw.html`.
+- CLI helper `scripts/parse-sample.js <sample-path>` lets you inspect parser output from any saved HTML snapshot; run `pnpm run parse` to exercise it against `samples/html-openclaw.html`.
 - Future work: extend parser to capture related searches, tabs (News/Images), and make snippets aversive when `result__snippet` is missing.
 
 ## Board
