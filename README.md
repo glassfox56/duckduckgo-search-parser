@@ -16,7 +16,7 @@ Document the strategy, progress, and next steps for the DuckDuckGo search result
 ## Progress
 - Repository created to house documentation (this doc).
 - Strategy outlined and approved in chat.
-- Collected three representative DuckDuckGo HTML snapshots (standard/search results, weather question, and news query) for parser reference.
+- Collected multiple DuckDuckGo HTML snapshots (standard results, weather question, news, Naandalist home page, and image/search variants) for parser reference.
 - Cataloged selectors/markup patterns in `docs/selectors.md`, based on the raw `/html/` output and zero-click section.
 - Built `src/duckduckgoParser.js` plus `scripts/parse-sample.js` to turn raw HTML into structured `{title, url, snippet, source}` records (run `npm run parse` to sample with `samples/html-openclaw.html`).
 
@@ -25,6 +25,10 @@ Representative HTML snapshots live under `samples/`:
 - `samples/html-openclaw.html`
 - `samples/html-weather-Jakarta.html`
 - `samples/html-OpenAI-news.html`
+- `samples/naandalist-home.html`
+- `samples/openclaw-news.html`
+- `samples/openclaw-images.html`
+- `samples/openclaw-search.html`
 
 ## Next Steps
 1. Hook parser into the `web_search` tool once outputs are consistent.
