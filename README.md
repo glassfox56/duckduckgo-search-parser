@@ -34,6 +34,7 @@ Representative HTML snapshots live under `samples/`:
 ## Parser Module
 - `src/duckduckgoParser.js` exports `parseDuckDuckGoHTML(html)` which returns an array of zero-click / web result objects with `title`, `url`, `displayUrl`, `snippet`, `date`, `isAd`, and `source` metadata.
 - CLI helper `scripts/parse-sample.js <sample-path>` lets you inspect parser output from any saved HTML snapshot; run `pnpm run parse` to exercise it against `samples/html-openclaw.html`.
+- Run `pnpm test` to exercise the built-in parser smoke test that validates zero-click content plus news dates (see `test/duckduckgoParser.test.js`).
 - Future work: extend parser to capture related searches, tabs (News/Images), and make snippets aversive when `result__snippet` is missing.
 
 ## Board

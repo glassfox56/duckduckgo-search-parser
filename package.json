@@ -7,8 +7,8 @@
     "doc": "docs"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "parse": "node scripts/parse-sample.js samples/html-openclaw.html"
+    "parse": "node scripts/parse-sample.js samples/html-openclaw.html",
+    "test": "node --test test/duckduckgoParser.test.js"
   },
   "repository": {
     "type": "git",
