@@ -1,0 +1,27 @@
+{
+  "name": "duckduckgo-task-docs",
+  "version": "1.0.0",
+  "description": "DuckDuckGo parser strategy and samples for the OpenClaw task.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "parse": "node scripts/parse-sample.js samples/html-openclaw.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/glassfox56/duckduckgo-task-docs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/glassfox56/duckduckgo-task-docs/issues"
+  },
+  "homepage": "https://github.com/glassfox56/duckduckgo-task-docs#readme",
+  "dependencies": {
+    "cheerio": "^1.2.0"
+  }
+}
