@@ -38,7 +38,8 @@ Representative HTML snapshots live under `samples/`:
 - Future work: extend parser to capture related searches, tabs (News/Images), and make snippets aversive when `result__snippet` is missing.
 
 ## DuckDuckGo Web Search Provider
-- `scripts/duckduckgo-web-search.js` (run via `pnpm run duckduckgo-search -- "OpenClaw" --region=US`) calls DuckDuckGo’s `/html/` endpoint, uses the parser to extract structured results, and emits JSON that mirrors what `web_search` expects.
+- `scripts/duckduckgo-web-search.js` (run via `pnpm run duckduckgo-search -- "OpenClaw" --region=US`) calls DuckDuckGo’s `/html/` endpoint, uses the parser to extract structured results, caches them, and emits JSON that mirrors what `web_search` expects.
+- The provider caches results per query+region for `DDG_CACHE_TTL_MIN` minutes (default 5) and caps the cache at `DDG_CACHE_MAX_ENTRIES` entries (default 200) to avoid repeated DuckDuckGo hits.
 - You can adjust `--region=<code>` to target a specific country (mapped to DuckDuckGo’s `kl` parameter) if the Gateway needs region-specific results.
 - This script shows how to integrate with the Gateway’s `web_search` tool by wrapping `fetchDuckDuckGo(query)` in a custom provider and feeding its results into the tool’s response format (see `docs/integration.md` for a sketch of an integration hook).
 

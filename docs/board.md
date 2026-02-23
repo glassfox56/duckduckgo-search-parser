@@ -3,8 +3,6 @@
 A lightweight Kanban-style list for tracking the work items related to the DuckDuckGo parser and `web_search` integration.
 
 ## 🧭 To Do
-- [ ] Introduce caching/rate-limit safeguards and error handling for situations where DuckDuckGo blocks or fails.
-- [ ] Keep documentation (README + docs/strategy.md) updated with selector decisions, parsing quirks, or new insights.
 - [ ] Report parser prototype status back to Mas Nanda via Telegram for review and feedback.
 
 ## 🛠 In Progress

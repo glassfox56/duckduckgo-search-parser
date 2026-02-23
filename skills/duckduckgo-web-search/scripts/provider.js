@@ -7,9 +7,14 @@ module.paths.unshift(rootNodeModules);
 
 const { fetch } = require('undici');
 const { parseDuckDuckGoHTML } = require(path.join(repoRoot, 'src', 'duckduckgoParser'));
+const { Cache } = require(path.join(repoRoot, 'src', 'cache'));
 
 const USER_AGENT =
   'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36';
+
+const cacheTtlMinutes = Math.max(1, Number(process.env.DDG_CACHE_TTL_MIN) || 5);
+const cacheMaxEntries = Math.max(1, Number(process.env.DDG_CACHE_MAX_ENTRIES) || 200);
+const cache = new Cache({ ttlMs: cacheTtlMinutes * 60 * 1000, maxEntries: cacheMaxEntries });
 
 async function fetchDuckDuckGo(query, opts = {}) {
   const url = new URL('https://duckduckgo.com/html/');
@@ -71,7 +76,15 @@ function parseCLIArgs(rawArgs) {
 
 async function run(rawArgs) {
   const { query, opts } = parseCLIArgs(rawArgs);
-  return fetchDuckDuckGo(query, opts);
+  const cacheKey = `${query}|${opts.region || 'default'}`;
+  const cached = cache.get(cacheKey);
+  if (cached) {
+    return cached;
+  }
+
+  const payload = await fetchDuckDuckGo(query, opts);
+  cache.set(cacheKey, payload);
+  return payload;
 }
 
 if (require.main === module) {

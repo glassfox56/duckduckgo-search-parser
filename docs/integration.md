@@ -42,7 +42,7 @@ Plug this module into the Gateway the same way you would a custom provider (for 
 ## 3. Caching & rate limits
 
 - `web_search` normally caches responses for a few minutes. You can layer the same caching logic around the `fetchDuckDuckGo` helper by storing the latest HTML per query (e.g., in-memory map keyed by `${query}|${region}` and timestamp).
-- DuckDuckGo HTML is lightweight, so you can keep a small LRU cache in the provider module and return cached results while the cache TTL is fresh.
+- DuckDuckGo HTML is lightweight, so you can keep a small LRU cache in the provider module and return cached results while the cache TTL is fresh. The default TTL is 5 minutes (configurable via `DDG_CACHE_TTL_MIN`) and the cache holds up to 200 entries (`DDG_CACHE_MAX_ENTRIES`).
 - Always send a realistic `User-Agent` and respect `robots` headers if you switch to a more aggressive fetch (more advanced rate limiting or rotating IPs may be necessary if you scale beyond casual use).
 
 ## 4. Packaging the wrapper as a skill
