@@ -27,7 +27,7 @@ description: "Provide a DuckDuckGo HTML-backed `web_search` provider when Brave/
 ## Code structure
 - `fetchDuckDuckGo(query, opts)` fetches `/html/` (with `--region`/`kl`) and returns `{ query, region, timestamp, results }` from the shared parser.
 - `run(argv)` parses CLI arguments, calls `fetchDuckDuckGo`, and returns the payload—this is the function the Gateway provider should call.
-- The CLI wrapper at `duckduckgo-search-openclaw/scripts/duckduckgo-web-search.js` simply loads this module and formats the JSON output.
+- The CLI wrapper at `duckduckgo-search-parser/scripts/duckduckgo-web-search.js` simply loads this module and formats the JSON output.
 
 ## Resources
 - `scripts/provider.js` (primary helper used inside Gateway or for manual inspection).
