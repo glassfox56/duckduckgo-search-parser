@@ -37,6 +37,11 @@ Representative HTML snapshots live under `samples/`:
 - Run `pnpm test` to exercise the built-in parser smoke test that validates zero-click content plus news dates (see `test/duckduckgoParser.test.js`).
 - Future work: extend parser to capture related searches, tabs (News/Images), and make snippets aversive when `result__snippet` is missing.
 
+## DuckDuckGo Web Search Provider
+- `scripts/duckduckgo-web-search.js` (run via `pnpm run duckduckgo-search -- "OpenClaw" --region=US`) calls DuckDuckGo’s `/html/` endpoint, uses the parser to extract structured results, and emits JSON that mirrors what `web_search` expects.
+- You can adjust `--region=<code>` to target a specific country (mapped to DuckDuckGo’s `kl` parameter) if the Gateway needs region-specific results.
+- This script shows how to integrate with the Gateway’s `web_search` tool by wrapping `fetchDuckDuckGo(query)` in a custom provider and feeding its results into the tool’s response format (see `docs/integration.md` for a sketch of an integration hook).
+
 ## Board
 The detailed to-do list lives in [docs/board.md](docs/board.md), arranged like a simple Kanban board for tracking progress.
 

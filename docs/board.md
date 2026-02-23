@@ -3,7 +3,6 @@
 A lightweight Kanban-style list for tracking the work items related to the DuckDuckGo parser and `web_search` integration.
 
 ## 🧭 To Do
-- [ ] Integrate the parser with the `web_search` tool so it can return structured results to users.
 - [ ] Introduce caching/rate-limit safeguards and error handling for situations where DuckDuckGo blocks or fails.
 - [ ] Keep documentation (README + docs/strategy.md) updated with selector decisions, parsing quirks, or new insights.
 - [ ] Report parser prototype status back to Mas Nanda via Telegram for review and feedback.
@@ -16,3 +15,4 @@ A lightweight Kanban-style list for tracking the work items related to the DuckD
 - [x] Cataloged selectors/markup metadata in `docs/selectors.md` so the parser knows which DOM nodes to target (zero-click, ads, dates, etc.).
 - [x] Implemented parser module (`src/duckduckgoParser.js`) plus CLI helper (`scripts/parse-sample.js`) to turn saved HTML into structured result records.
 - [x] Added parser smoke tests (`test/duckduckgoParser.test.js`) that validate zero-click awareness and news metadata, runnable via `pnpm test`.
+- [x] Integrated the parser into a DuckDuckGo-backed `web_search` provider (see `scripts/duckduckgo-web-search.js` + `docs/integration.md`).

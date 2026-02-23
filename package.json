@@ -8,6 +8,7 @@
   },
   "scripts": {
     "parse": "node scripts/parse-sample.js samples/html-openclaw.html",
+    "duckduckgo-search": "node scripts/duckduckgo-web-search.js",
     "test": "node --test test/duckduckgoParser.test.js"
   },
   "repository": {
@@ -22,6 +23,7 @@
   },
   "homepage": "https://github.com/glassfox56/duckduckgo-task-docs#readme",
   "dependencies": {
-    "cheerio": "^1.2.0"
+    "cheerio": "^1.2.0",
+    "undici": "^7.22.0"
   }
 }
