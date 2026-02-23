@@ -19,7 +19,7 @@ This document shows how the parser can be wired into the Gateway's `web_search` 
 Because Gateway tools are pluggable, you can wrap `fetchDuckDuckGo` inside your `web_search` provider implementation:
 
 ```js
-const { fetchDuckDuckGo } = require("../duckduckgo-task-docs/scripts/duckduckgo-web-search");
+const { fetchDuckDuckGo } = require("../scripts/duckduckgo-web-search");
 
 async function duckDuckGoProvider({ query, count }) {
   const { results } = await fetchDuckDuckGo(query);
