@@ -1,13 +1,13 @@
 ---
 name: duckduckgo-web-search
-description: "DuckDuckGo-backed web_search provider. Use this skill when configuring OpenClaw Gateway to use DuckDuckGo's HTML endpoint (free, no API key) instead of Brave/Perplexity APIs. Supports region-specific results, caching, and zero-click answers."
+description: "DuckDuckGo-backed web search CLI tool. Use this skill for free, API-key-free web searches without needing Brave/Perplexity APIs. Supports region-specific results, caching, and zero-click answers."
 ---
 
 # DuckDuckGo Web Search Skill
 
 ## Overview
 
-This skill provides a **free, API-key-free alternative** to Brave/Perplexity for the OpenClaw `web_search` tool. It uses DuckDuckGo's HTML endpoint + a custom parser to extract:
+This skill provides a **free, API-key-free alternative** to Brave/Perplexity for web searches. It uses DuckDuckGo's HTML endpoint + a custom parser to extract:
 
 - **Zero-click answers** (Wikipedia, IMDb, definitions, etc.)
 - **Web results** with titles, snippets, dates
@@ -41,27 +41,16 @@ This skill provides a **free, API-key-free alternative** to Brave/Perplexity for
    - Handles zero-click, web, news, images
    - Validates and cleans metadata
 
-3. **`openclaw-provider.js`** - OpenClaw integration wrapper
-   - Bridges provider to Gateway
-   - Formats results for tool consumption
-   - Error handling & fallbacks
-
 ### Data Flow
 
 ```
-Agent Query ("Search for Glass Fox")
+CLI: node scripts/provider.js "query" --region US
     ↓
-web_search tool invoked
+script fetches DuckDuckGo HTML
     ↓
-openclaw-provider.js (OpenClaw wrapper)
+duckduckgoParser.js extracts results
     ↓
-scripts/provider.js (fetch + parse)
-    ↓
-DuckDuckGo /html/ endpoint
-    ↓
-duckduckgoParser.js (extract results)
-    ↓
-Return structured results to agent
+Returns JSON to stdout
 ```
 
 ## Installation
@@ -80,40 +69,20 @@ pnpm test          # Run parser tests
 node scripts/provider.js "OpenClaw" --region US  # Manual test
 ```
 
-## Configuration
+## Usage
 
-### Gateway Integration (openclaw.json)
+### Manual CLI (Recommended)
+```bash
+cd skills/duckduckgo-web-search
 
-**Option A: Tool Override (Simplest)**
-```json
-{
-  "agents": {
-    "main": {
-      "toolOverrides": {
-        "web_search": {
-          "provider": "duckduckgo-html",
-          "region": "US"
-        }
-      }
-    }
-  }
-}
-```
+# Basic search
+node scripts/provider.js "Glass Fox"
 
-**Option B: Global Tool Config**
-```json
-{
-  "tools": {
-    "web": {
-      "search": {
-        "provider": "duckduckgo-html",
-        "region": "US",
-        "cacheMinutes": 5,
-        "maxCacheEntries": 200
-      }
-    }
-  }
-}
+# Region-specific search
+node scripts/provider.js "Weather Jakarta" --region ID
+
+# Output is JSON
+node scripts/provider.js "OpenClaw" --region US | jq '.results | length'
 ```
 
 ### Region Codes (Supported)
@@ -136,21 +105,6 @@ node scripts/provider.js "OpenClaw" --region US  # Manual test
 ```bash
 export DDG_CACHE_TTL_MIN=5          # Cache TTL (minutes)
 export DDG_CACHE_MAX_ENTRIES=200    # Max cached queries
-```
-
-## Usage
-
-### Via Agent (Automatic)
-```
-You: "Search for latest AI news"
-Fox: [Invokes web_search tool with DuckDuckGo provider]
-```
-
-### Manual CLI
-```bash
-cd skills/duckduckgo-web-search
-node scripts/provider.js "Glass Fox" --region US
-node scripts/provider.js "Weather Jakarta" --region ID
 ```
 
 ### Output Format
@@ -192,20 +146,70 @@ node scripts/provider.js "Weather Jakarta" --region ID
 - [x] Caching implemented
 - [x] Region support added
 - [x] SKILL.md documentation
-
-### 🚧 In Progress
-- [ ] Gateway config integration (Phase 2)
-- [ ] Tool override setup
-- [ ] End-to-end agent test
-- [ ] Performance monitoring
+- [x] CLI-only approach (safe, no Gateway integration)
 
 ### 📋 Future Enhancements
+- [ ] Shell wrapper for easier CLI invocation
 - [ ] Add related searches extraction
 - [ ] Support image search tab
 - [ ] Video results parsing
 - [ ] Sentiment analysis of snippets
 - [ ] Query suggestions (related queries)
 - [ ] Cache persistence (SQLite or file-based)
+
+## Troubleshooting
+
+### "No results returned"
+```bash
+# Check if DuckDuckGo is blocking:
+curl -A "Mozilla/5.0..." "https://duckduckgo.com/html/?q=test&kl=us-en"
+
+# If blocked, rotate user-agent or add delay
+```
+
+### "Results have old dates"
+DuckDuckGo sometimes caches. Try:
+- Clear cache: `rm -rf ~/.openclaw/cache`
+- Change region to force fresh fetch
+- Search more specific query
+
+### "Memory usage high"
+Cache growing too fast. Adjust:
+```bash
+export DDG_CACHE_MAX_ENTRIES=50  # Reduce from 200
+```
+
+## Performance Notes
+
+- **First query**: ~2-3 seconds (network)
+- **Cached query**: <100ms (in-memory)
+- **Cache hit rate**: Typically 60-70% for repeated searches
+- **Bandwidth**: ~50KB per query (HTML page)
+
+## Security & Privacy
+
+- **No API keys stored** in config
+- **No tracking**: Just HTML requests
+- **Cache is in-memory** (doesn't persist between restarts)
+- **User-Agent**: Standard browser header (no fingerprinting)
+- **No data exfiltration** (results stay local)
+
+## References
+
+- [DuckDuckGo](https://duckduckgo.com)
+- [Repo](https://github.com/glassfox56/duckduckgo-search-parser)
+- [OpenClaw Docs](https://docs.openclaw.ai)
+
+## Contact & Support
+
+- **Maintainer**: Mas Nanda (@glassfox56)
+- **Status**: Active development (CLI-only, no Gateway integration)
+- **Last updated**: 2026-02-26
+
+---
+
+**Questions?** Check `README.md` or reach out to the maintainer.
+
 
 ## Troubleshooting
 
